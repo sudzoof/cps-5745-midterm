@@ -67,6 +67,9 @@ export default function Home({data}) {
         )
       }
 
+      <b>Analysis: </b>
+      
+      AAPL had the highest spike in returns by far over the recorded period of time, even though it started from the lowest initial stock price.
     </div>
   );
 }
