@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { parse } from 'csv-parse/sync';
 import fs from 'fs';
 import path from 'path';
+import { useState } from 'react';
 
 const Plotly = dynamic(
   () => import('plotly.js-dist-min'),
@@ -23,17 +24,29 @@ export async function getStaticProps() {
 }
 
 export default function Home({data}) {
+  const [stock, setStock] = useState([]);
+
+  const stockList = ['MSFT', 'IBM', 'SBUX', 'AAPL', 'GSPC'];
+
   return (
     <div>
       <h1>Developed for CPS*5745</h1>
 
-      <ul>
-        {data.map((row, i) => (
-          <li key={i}>
-            {JSON.stringify(row)}
-          </li>
-        ))}
-      </ul>
+      {stockList.map((s) => (
+        <label>
+          <input
+            type="checkbox"
+            value={s}
+            checked={stock.includes(s)}
+            onChange={() => setStock((prev) => prev.includes(s) 
+              ? prev.filter((k) => k !== s)
+              : [...prev, s])
+            }  
+          />
+        {s}
+        </label>
+      ))}
+      
     </div>
   );
 }
