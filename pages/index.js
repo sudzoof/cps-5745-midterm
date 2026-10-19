@@ -1,13 +1,8 @@
-import dynamic from 'next/dynamic';
 import { parse } from 'csv-parse/sync';
 import fs from 'fs';
 import path from 'path';
 import { useState } from 'react';
-
-const Plotly = dynamic(
-  () => import('plotly.js-dist-min'),
-  { ssr: false }
-);
+import RawPriceChart from '../components/RawPriceChart';
 
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'data/stockdata.csv');
@@ -24,7 +19,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({data}) {
-  const [stock, setStock] = useState([]);
+  const [stock, setStock] = useState(['MSFT', 'IBM', 'SBUX', 'AAPL', 'GSPC']);
 
   const stockList = ['MSFT', 'IBM', 'SBUX', 'AAPL', 'GSPC'];
 
@@ -46,7 +41,12 @@ export default function Home({data}) {
         {s}
         </label>
       ))}
-      
+
+      <RawPriceChart
+        data={data}
+        stock={stock}
+      />
+
     </div>
   );
 }
