@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { useState } from 'react';
 import RawPriceChart from '../components/RawPriceChart';
+import NormalizedReturnChart from '../components/NormalizedReturnChart';
 
 export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'data/stockdata.csv');
@@ -43,6 +44,11 @@ export default function Home({data}) {
       ))}
 
       <RawPriceChart
+        data={data}
+        stock={stock}
+      />
+
+      <NormalizedReturnChart
         data={data}
         stock={stock}
       />
