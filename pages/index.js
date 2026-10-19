@@ -21,12 +21,18 @@ export async function getStaticProps() {
 
 export default function Home({data}) {
   const [stock, setStock] = useState(['MSFT', 'IBM', 'SBUX', 'AAPL', 'GSPC']);
+  const [chartType, setChartType] = useState('RawPriceChart');
 
   const stockList = ['MSFT', 'IBM', 'SBUX', 'AAPL', 'GSPC'];
 
   return (
     <div>
       <h1>Developed for CPS*5745</h1>
+
+      <select value={chartType} onChange={(e) => setChartType(event.target.value)}>
+        <option value="RawPriceChart">Raw Price (line graph)</option>
+        <option value="NormalizedReturnChart">Normalized Return (line graph)</option>
+      </select>
 
       {stockList.map((s) => (
         <label>
@@ -43,15 +49,23 @@ export default function Home({data}) {
         </label>
       ))}
 
-      <RawPriceChart
-        data={data}
-        stock={stock}
-      />
-
-      <NormalizedReturnChart
-        data={data}
-        stock={stock}
-      />
+      {
+        chartType === "RawPriceChart" ? (
+          <RawPriceChart
+            data={data}
+            stock={stock}
+          />
+        )
+        : chartType === "NormalizedReturnChart" ? (
+          <NormalizedReturnChart
+            data={data}
+            stock={stock}
+          />
+        )
+        : (
+          <></>
+        )
+      }
 
     </div>
   );
