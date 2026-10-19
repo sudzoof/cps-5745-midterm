@@ -16,8 +16,8 @@ export default function RawPriceChart({data, stock}) {
   );
 
   const layout = {
-    xaxis: { title: 'Day' },
-    yaxis: { title: 'Value' },
+    xaxis: { title: { text: 'Day' }},
+    yaxis: { title: { text: 'Value (USD)' }},
   }
 
   return (
