@@ -1,0 +1,1 @@
+csv sourced from https://github.com/plotly/datasets/blob/master/stockdata.csv
